@@ -1,5 +1,7 @@
 module Price
   class Calculate
+    attr_reader :order, :packs
+
     def initialize(order, packs)
       @order = order
       @packs = packs
@@ -8,7 +10,7 @@ module Price
 
     def results
       order.items.each do |item|
-        find_numbers(item[0], packs.find_c(itemounts[1]))
+        find_numbers(item[0], packs.find_counts(item[1]))
       end
     end
 

@@ -6,13 +6,13 @@ module Price
   # format:
   # COUNT  PRICE   CODE
   class Packs < Input
-    def find_prices(code)
+    def find_by_code(code)
       @prices ||= {}
-      @prices[code] = @items.select{ |item| item[2] == code }
+      @prices[code] = @items.select{ |item| item[0] == code }
     end
 
     def find_counts(code)
-      find_prices(code).map{ |row| row[0] }.sort.reverse
+      find_by_code(code).map{ |row| row[1] }.sort.reverse
     end
 
     private
@@ -22,7 +22,7 @@ module Price
       File.foreach(file) do |line|
         row = line.strip.split(/\s+/)
         raise Price::Error::InvalidLine, "Line #{i} is invalid '#{line}'" if row[0].nil? || row[1].nil? || row[2].nil?
-        @items << [row[0].to_i, row[1].to_f.round(2), row[2]]
+        @items << [row[0], row[1].to_i, row[2].to_f.round(2)]
         i += 1
       end
     end

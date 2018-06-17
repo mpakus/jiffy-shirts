@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'price'
+require 'awesome_print'
 # require 'support/output_mock'
 
 RSpec.configure do |config|

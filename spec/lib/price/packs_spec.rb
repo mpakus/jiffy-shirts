@@ -28,9 +28,18 @@ RSpec.describe Price::Packs do
 
     describe '#items' do
       it { subject.items { |row| expect(row).to is_a? Array } }
-      it { subject.items { |row| expect(row[0]).to is_a? Integer } }
-      it { subject.items { |row| expect(row[1]).to is_a? Float } }
-      it { subject.items { |row| expect(row[2]).to is_a? String } }
+      it { subject.items { |row| expect(row[0]).to is_a? String } }
+      it { subject.items { |row| expect(row[1]).to is_a? Integer } }
+      it { subject.items { |row| expect(row[2]).to is_a? Float } }
+    end
+
+    describe '.find_packs' do
+      it { expect(subject.find_by_code('MB11').count).to eq 3 }
+    end
+
+    describe '.find_counts' do
+      it { expect(subject.find_counts('MB11').count).to eq 3 }
+      it { expect(subject.find_counts('MB11')).to match_array [8, 5, 2] }
     end
   end
 end
