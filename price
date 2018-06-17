@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'clamp'
+require_relative './lib/price'
+
+Clamp do
+  option ['-o', '--order'], 'ORDER', 'input file with order'
+  option ['-p', '--pack'], 'PACK', 'input file with packs'
+
+  def execute
+    Price.perform(order, pack || './lib/packs.txt')
+  end
+end
