@@ -9,6 +9,6 @@ Clamp do
   option ['-p', '--pack'], 'PACK', 'input file with packs'
 
   def execute
-    Price.perform(order, pack || './lib/packs.txt')
+    Price.perform(order || './order.txt', pack || './lib/packs.txt')
   end
 end

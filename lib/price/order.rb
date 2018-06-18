@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'input'
 
 module Price
@@ -8,12 +9,14 @@ module Price
   class Order < Input
     private
 
+    # Read and parse Order file
+    # @param file [String]
     def read(file)
       i = 1
       File.foreach(file) do |line|
         row = line.strip.split(/\s+/)
         raise Price::Error::InvalidLine, "Line #{i} is invalid '#{line}'" if row[0].nil? || row[1].nil?
-        @items << [row[0].to_i, row[1]]
+        @items << OrderItem.new(row[0].to_i, row[1])
         i += 1
       end
     end

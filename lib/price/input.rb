@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Price
+  # File input class
   class Input
     attr_reader :items
 
